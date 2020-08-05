@@ -104,5 +104,5 @@ theme: cactus
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/arctanln2/arctanln2.github.io
+  repo: https://github.com/arctanln2/arctanln2.github.io.git
   branch: master
