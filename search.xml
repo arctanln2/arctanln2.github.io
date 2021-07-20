@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>MDP</title>
+      <link href="/2021/07/20/MDP/"/>
+      <url>/2021/07/20/MDP/</url>
+      
+        <content type="html"><![CDATA[<p><img src="/2021/07/20/MDP/2_2.png"><br>上图介绍了强化学习里面agent跟environment的交互，马尔可夫决策过程是强化学习的一个基本框架，可以表示上图的这个交互过程。</p><p>先介绍</p><h2 id="马尔可夫链"><a href="#马尔可夫链" class="headerlink" title="马尔可夫链"></a>马尔可夫链</h2><h2 id="马尔可夫奖励过程"><a href="#马尔可夫奖励过程" class="headerlink" title="马尔可夫奖励过程"></a>马尔可夫奖励过程</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>Easy-RL_v1.0.0</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 强化学习 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>markdown note</title>
       <link href="/2021/07/20/markdown-note/"/>
       <url>/2021/07/20/markdown-note/</url>
