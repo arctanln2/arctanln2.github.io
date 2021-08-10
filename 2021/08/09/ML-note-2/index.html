@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1 General Guide先看training data上的loss 优化上的问题 局部最小不一定会对最后结果产生影响 【model bias】模型的不足，有比较大的偏差 【Overfitting】训练结果好，但是测试结果反而变差。比较有弹性的模型会有更差的结果。 解决方法： 增加模型的限制，如减少参数，共享参数，少的特征，更早停止训练过程，正则化 【mismatch】有些深的网络在训练集上肯">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】李宏毅机器学习第二节 机器学习任务攻略">
+<meta property="og:url" content="http://yoursite.com/2021/08/09/ML-note-2/index.html">
+<meta property="og:site_name" content="arctanln2">
+<meta property="og:description" content="1 General Guide先看training data上的loss 优化上的问题 局部最小不一定会对最后结果产生影响 【model bias】模型的不足，有比较大的偏差 【Overfitting】训练结果好，但是测试结果反而变差。比较有弹性的模型会有更差的结果。 解决方法： 增加模型的限制，如减少参数，共享参数，少的特征，更早停止训练过程，正则化 【mismatch】有些深的网络在训练集上肯">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-09T09:35:27.000Z">
+<meta property="article:modified_time" content="2021-08-10T06:55:24.828Z">
+<meta property="article:author" content="kilostaray">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>【笔记】李宏毅机器学习第二节 机器学习任务攻略</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+         
+          <li><a href="/categories">分类</a></li>
+         
+          <li><a href="/tags">标签</a></li>
+         
+          <li><a href="/search">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/08/09/ML-Li-Hongyi-1/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2021/08/09/ML-note-2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://yoursite.com/2021/08/09/ML-note-2/&text=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2021/08/09/ML-note-2/&title=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2021/08/09/ML-note-2/&is_video=false&description=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【笔记】李宏毅机器学习第二节 机器学习任务攻略&body=Check out this article: http://yoursite.com/2021/08/09/ML-note-2/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://yoursite.com/2021/08/09/ML-note-2/&title=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://yoursite.com/2021/08/09/ML-note-2/&title=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2021/08/09/ML-note-2/&title=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://yoursite.com/2021/08/09/ML-note-2/&title=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2021/08/09/ML-note-2/&name=【笔记】李宏毅机器学习第二节 机器学习任务攻略&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2021/08/09/ML-note-2/&t=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-General-Guide"><span class="toc-number">1.</span> <span class="toc-text">1 General Guide</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AAmodel%E6%AF%94%E8%BE%83%E5%A5%BD%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">怎么判断一个model比较好？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Optimization"><span class="toc-number">2.</span> <span class="toc-text">2 Optimization</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Batch"><span class="toc-number">2.1.</span> <span class="toc-text">Batch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Momentum"><span class="toc-number">2.2.</span> <span class="toc-text">Momentum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E8%B0%83%E6%95%B4%E5%AD%A6%E4%B9%A0%E7%8E%87-adaptive"><span class="toc-number">2.3.</span> <span class="toc-text">自动调整学习率 adaptive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-number">2.4.</span> <span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Batch-Normalization"><span class="toc-number">2.5.</span> <span class="toc-text">Batch Normalization</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-New-Optimization"><span class="toc-number">3.</span> <span class="toc-text">3 New Optimization</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        【笔记】李宏毅机器学习第二节 机器学习任务攻略
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">arctanln2</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-08-09T09:35:27.000Z" itemprop="datePublished">2021-08-09</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/ML/">ML</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="1-General-Guide"><a href="#1-General-Guide" class="headerlink" title="1 General Guide"></a>1 General Guide</h2><p>先看training data上的loss</p>
+<p><strong>优化上的问题</strong></p>
+<p>局部最小不一定会对最后结果产生影响</p>
+<p>【model bias】模型的不足，有比较大的偏差</p>
+<p>【Overfitting】训练结果好，但是测试结果反而变差。比较有弹性的模型会有更差的结果。</p>
+<p><strong>解决方法</strong>：</p>
+<p>增加模型的限制，如减少参数，共享参数，少的特征，更早停止训练过程，正则化</p>
+<p>【mismatch】有些深的网络在训练集上肯定可以比浅的表现好，但是可能因为优化方法的局限导致无法得到好的拟合结果。训练资料和测试资料的分布是不一样的，那么训练模型本来就没有什么意义。</p>
+<p><strong>Data augmentation</strong></p>
+<p>比如对一张图片进行截取，翻转增加图片的数量</p>
+<h3 id="怎么判断一个model比较好？"><a href="#怎么判断一个model比较好？" class="headerlink" title="怎么判断一个model比较好？"></a>怎么判断一个model比较好？</h3><p>测试集上的结果很好也不一定是个好的模型。</p>
+<p>【Training Set】分为【Training Set】和【Validation Set】</p>
+<h2 id="2-Optimization"><a href="#2-Optimization" class="headerlink" title="2 Optimization"></a>2 Optimization</h2><p>优化loss函数时gradient是零有两种可能【local minima】和【saddle point】</p>
+<p>可以利用泰勒公式进行判定<br>$$<br>L(\theta)\approx L(\theta’)+(\theta-\theta’)^{T}g+\frac{1}{2}(\theta-\theta’)^{T}H(\theta-\theta’)<br>$$<br>利用【critical point】附近的点进行计算有3中可能</p>
+<ul>
+<li>$v^T Hv&gt;0$ =》 Local minima</li>
+<li>$v^T Hv&lt;0$ =》 Local maxima</li>
+<li>部分$v^T Hv&gt;0$, 部分$v^T Hv&lt;0$ =》 Saddle point</li>
+</ul>
+<p>H可以告诉我们参数可能的优化方向</p>
+<p>$u$是H的特征向量</p>
+<p>$\lambda$是H的特征值，且小于0<br>$$<br>u^T Hu=u^T(\lambda u)=\lambda||u||^2<br>$$<br>则可以沿着u的方向去更新参数</p>
+<p><strong>实际上不会利用计算Hessian值来逃离【Saddle Point】，因为计算量很大</strong></p>
+<p>经验上看，卡在【local minima】的可能其实不是很大，很多都是【saddle point】</p>
+<h3 id="Batch"><a href="#Batch" class="headerlink" title="Batch"></a>Batch</h3><p>分Batch的时候会同时进行Shuffle，像洗牌。</p>
+<p>Batch size的大小似乎需要在蓄力时间和技能威力间进行权衡，但是大的Batch在一个epoch的时间可能会比小的Batch需要的时间短。</p>
+<p><strong>大的batch size可能会有问题是为什么呢？</strong></p>
+<p>小的batch size训练时的损失函数可能没有到局部最优，但大的batch size可能到了局部最优</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Small</th>
+<th>Large</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Speed for one update(no parallel)</td>
+<td>Faster</td>
+<td>Slower</td>
+</tr>
+<tr>
+<td>Speed for one update(with parallel)</td>
+<td>Same</td>
+<td>Same(not too large)</td>
+</tr>
+<tr>
+<td>Time for one epoch</td>
+<td>Slower</td>
+<td><strong>Faster</strong></td>
+</tr>
+<tr>
+<td>Gradient</td>
+<td>Noisy</td>
+<td>Stable</td>
+</tr>
+<tr>
+<td>Optimization</td>
+<td><strong>Better</strong></td>
+<td>Worse</td>
+</tr>
+<tr>
+<td>Generalization</td>
+<td><strong>Better</strong></td>
+<td>Worse</td>
+</tr>
+</tbody></table>
+<h3 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h3><p>考虑到前一次梯度的影响<br>$$<br>m^{1}=\lambda m^0 -\eta g^0<br>$$</p>
+<h3 id="自动调整学习率-adaptive"><a href="#自动调整学习率-adaptive" class="headerlink" title="自动调整学习率 adaptive"></a>自动调整学习率 adaptive</h3><p>当loss不再下降的时候，gradient并不一定很小</p>
+<p>走到critical point并不是一件容易的事情<br>$$<br>\theta_i^{t+1}\leftarrow  \theta_i^t -\frac{\eta}{\sigma_i^t}g_i^t<br>$$<br>【Root Mean Square】<br>$$<br>\sigma_i^t=\sqrt {\frac{1}{t+1}\sum_{i=0}^t (g_i^t)^2}<br>$$<br>【RMSProp】<br>$$<br>\sigma_i^t=\sqrt {\alpha(\sigma_i^{t-1})^2+(1-\alpha)(g_i^t)^2}<br>$$<br>【Adam】：【RMSProp+Momentum】</p>
+<p>【Learning Rate Scheduling】</p>
+<p>【Learning Rate Decay】学习率随时间减少</p>
+<p>【Warm Up】学习率先变大再变小</p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>【One-hot vector】来表示类别</p>
+<p>神经网络多个输出，然后用Soft-max函数将其映射到0-1之间。</p>
+<p>Soft-max可以让数之间的差距更大。</p>
+<p>【Corss-entorpy】<br>$$<br>e=-\sum_{i}\hat {y_i}lny’_i<br>$$<br>Pytorch中Corss-entorpy和Softmax常常绑定在一起</p>
+<p>改loss function可以改变优化的难度</p>
+<h3 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h3><p>可以让train更容易</p>
+<p>特征值都在0上下</p>
+<p>样本之间彼此关联了</p>
+<p>训练的时候进行Batch Noramalization</p>
+<p>testing也可以说是inference</p>
+<p>那么测试的时候用哪个Batch的$\mu,\sigma$<br>$$<br>\bar \mu \leftarrow p\bar \mu +(1-p)\mu^t<br>$$<br>【Internal Covariate Shift】</p>
+<p>serendipitous（偶然的）</p>
+<h2 id="3-New-Optimization"><a href="#3-New-Optimization" class="headerlink" title="3 New Optimization"></a>3 New Optimization</h2><p>before</p>
+<ul>
+<li>SGD：stochastic gradient descent</li>
+<li>SGD with momentum（SGDM）</li>
+<li>Adagrad</li>
+<li>RMSPRop</li>
+<li>Adam</li>
+</ul>
+
+  </div>
+  <div>
+    <a href="https://github.com/arctanln2/arctanln2.github.io/edit/myblog/source/_posts/ML-note-2.md" target="_blank">编辑</a>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+         
+          <li><a href="/categories">分类</a></li>
+         
+          <li><a href="/tags">标签</a></li>
+         
+          <li><a href="/search">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-General-Guide"><span class="toc-number">1.</span> <span class="toc-text">1 General Guide</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AAmodel%E6%AF%94%E8%BE%83%E5%A5%BD%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">怎么判断一个model比较好？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Optimization"><span class="toc-number">2.</span> <span class="toc-text">2 Optimization</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Batch"><span class="toc-number">2.1.</span> <span class="toc-text">Batch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Momentum"><span class="toc-number">2.2.</span> <span class="toc-text">Momentum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E8%B0%83%E6%95%B4%E5%AD%A6%E4%B9%A0%E7%8E%87-adaptive"><span class="toc-number">2.3.</span> <span class="toc-text">自动调整学习率 adaptive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-number">2.4.</span> <span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Batch-Normalization"><span class="toc-number">2.5.</span> <span class="toc-text">Batch Normalization</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-New-Optimization"><span class="toc-number">3.</span> <span class="toc-text">3 New Optimization</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2021/08/09/ML-note-2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://yoursite.com/2021/08/09/ML-note-2/&text=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2021/08/09/ML-note-2/&title=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2021/08/09/ML-note-2/&is_video=false&description=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【笔记】李宏毅机器学习第二节 机器学习任务攻略&body=Check out this article: http://yoursite.com/2021/08/09/ML-note-2/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://yoursite.com/2021/08/09/ML-note-2/&title=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://yoursite.com/2021/08/09/ML-note-2/&title=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2021/08/09/ML-note-2/&title=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://yoursite.com/2021/08/09/ML-note-2/&title=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2021/08/09/ML-note-2/&name=【笔记】李宏毅机器学习第二节 机器学习任务攻略&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2021/08/09/ML-note-2/&t=【笔记】李宏毅机器学习第二节 机器学习任务攻略"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2021
+    kilostaray
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+         
+          <li><a href="/categories">分类</a></li>
+         
+          <li><a href="/tags">标签</a></li>
+         
+          <li><a href="/search">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
