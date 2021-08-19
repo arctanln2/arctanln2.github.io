@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="学习视频【狂神说Java】GUI编程入门到游戏实战 1、AWT1.1、AWT介绍Abstract windows tool 包含了很多类和接口 1.2、组件Frame123456789101112package guipart.demo01;import java.awt.*;public class TestFrame&amp;#123;    public static void main(Strin">
+    <meta name="description" content="学习视频【狂神说Java】GUI编程入门到游戏实战 1、AWT 1.1、AWT介绍 Abstract windows tool 包含了很多类和接口 1.2、组件 Frame 123456789101112package guipart.demo01;import java.awt.*;public class TestFrame&amp;#123;    public static void">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【笔记】Java GUI(1)">
 <meta property="og:url" content="http://yoursite.com/2021/08/03/java-gui-1/index.html">
 <meta property="og:site_name" content="arctanln2">
-<meta property="og:description" content="学习视频【狂神说Java】GUI编程入门到游戏实战 1、AWT1.1、AWT介绍Abstract windows tool 包含了很多类和接口 1.2、组件Frame123456789101112package guipart.demo01;import java.awt.*;public class TestFrame&amp;#123;    public static void main(Strin">
+<meta property="og:description" content="学习视频【狂神说Java】GUI编程入门到游戏实战 1、AWT 1.1、AWT介绍 Abstract windows tool 包含了很多类和接口 1.2、组件 Frame 123456789101112package guipart.demo01;import java.awt.*;public class TestFrame&amp;#123;    public static void">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-03T05:42:15.000Z">
 <meta property="article:modified_time" content="2021-08-10T06:56:04.727Z">
@@ -70,11 +70,9 @@
          
           <li><a href="/projects_url">项目</a></li>
          
-          <li><a href="/categories">分类</a></li>
+          <li><a href="/categories/">分类</a></li>
          
-          <li><a href="/tags">标签</a></li>
-         
-          <li><a href="/search">搜索</a></li>
+          <li><a href="/tags/">标签</a></li>
         
       </ul>
     </span>
@@ -82,7 +80,7 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2021/08/09/ML-Li-Hongyi-1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2021/08/09/ML-note-1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" href="/2021/08/02/couchDB-note/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -113,7 +111,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81AWT"><span class="toc-number">1.</span> <span class="toc-text">1、AWT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E3%80%81AWT%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">1.1、AWT介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E3%80%81%E7%BB%84%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">1.2、组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Frame"><span class="toc-number">1.2.1.</span> <span class="toc-text">Frame</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Panel"><span class="toc-number">1.2.2.</span> <span class="toc-text">Panel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86%E5%99%A8"><span class="toc-number">1.2.3.</span> <span class="toc-text">布局管理器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC"><span class="toc-number">1.2.4.</span> <span class="toc-text">事件监听</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81Swing"><span class="toc-number">2.</span> <span class="toc-text">2、Swing</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#awt"><span class="toc-number">1.</span> <span class="toc-text">1、AWT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#awt%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">1.1、AWT介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">1.2、组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#frame"><span class="toc-number">1.2.1.</span> <span class="toc-text">Frame</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#panel"><span class="toc-number">1.2.2.</span> <span class="toc-text">Panel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86%E5%99%A8"><span class="toc-number">1.2.3.</span> <span class="toc-text">布局管理器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC"><span class="toc-number">1.2.4.</span> <span class="toc-text">事件监听</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#swing"><span class="toc-number">2.</span> <span class="toc-text">2、Swing</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -153,30 +151,33 @@
 
   <div class="content" itemprop="articleBody">
     <p>学习视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1DJ411B75F">【狂神说Java】GUI编程入门到游戏实战</a></p>
-<h2 id="1、AWT"><a href="#1、AWT" class="headerlink" title="1、AWT"></a>1、AWT</h2><h3 id="1-1、AWT介绍"><a href="#1-1、AWT介绍" class="headerlink" title="1.1、AWT介绍"></a>1.1、AWT介绍</h3><p>Abstract windows tool</p>
+<h2 id="awt">1、AWT</h2>
+<h3 id="awt介绍">1.1、AWT介绍</h3>
+<p>Abstract windows tool</p>
 <p>包含了很多类和接口</p>
-<h3 id="1-2、组件"><a href="#1-2、组件" class="headerlink" title="1.2、组件"></a>1.2、组件</h3><h4 id="Frame"><a href="#Frame" class="headerlink" title="Frame"></a>Frame</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> guipart.demo01;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFrame</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Frame frame=<span class="keyword">new</span> Frame(<span class="string">&quot;the first java gui window&quot;</span>);</span><br><span class="line">        frame.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        frame.setSize(<span class="number">400</span>,<span class="number">400</span>);</span><br><span class="line">        frame.setBackground(<span class="keyword">new</span> Color(<span class="number">70</span>,<span class="number">85</span>,<span class="number">1</span>));</span><br><span class="line">        frame.setLocation(<span class="number">200</span>,<span class="number">200</span>);</span><br><span class="line">        frame.setResizable(<span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="Panel"><a href="#Panel" class="headerlink" title="Panel"></a>Panel</h4><p>并解决了关闭事件</p>
+<h3 id="组件">1.2、组件</h3>
+<h4 id="frame">Frame</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> guipart.demo01;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFrame</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Frame frame=<span class="keyword">new</span> Frame(<span class="string">&quot;the first java gui window&quot;</span>);</span><br><span class="line">        frame.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        frame.setSize(<span class="number">400</span>,<span class="number">400</span>);</span><br><span class="line">        frame.setBackground(<span class="keyword">new</span> Color(<span class="number">70</span>,<span class="number">85</span>,<span class="number">1</span>));</span><br><span class="line">        frame.setLocation(<span class="number">200</span>,<span class="number">200</span>);</span><br><span class="line">        frame.setResizable(<span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="panel">Panel</h4>
+<p>并解决了关闭事件</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> guipart.demo01;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.WindowAdapter;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.WindowEvent;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.WindowListener;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPanel</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Frame frame=<span class="keyword">new</span> Frame();</span><br><span class="line">        Panel panel=<span class="keyword">new</span> Panel();</span><br><span class="line"></span><br><span class="line">        frame.setLayout(<span class="keyword">null</span>);</span><br><span class="line">        frame.setBounds(<span class="number">300</span>,<span class="number">300</span>,<span class="number">500</span>,<span class="number">500</span>);</span><br><span class="line">        frame.setBackground(Color.blue);</span><br><span class="line"></span><br><span class="line">        panel.setBounds(<span class="number">50</span>,<span class="number">50</span>,<span class="number">400</span>,<span class="number">400</span>);</span><br><span class="line">        panel.setBackground(Color.green);</span><br><span class="line"></span><br><span class="line">        frame.add(panel);</span><br><span class="line">        frame.setVisible(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//监听事件</span></span><br><span class="line"></span><br><span class="line">        frame.addWindowListener(<span class="keyword">new</span> WindowAdapter()&#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">windowClosing</span><span class="params">(WindowEvent e)</span></span>&#123;</span><br><span class="line">                <span class="comment">//super.windowClosing(e);</span></span><br><span class="line">                System.exit(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="布局管理器"><a href="#布局管理器" class="headerlink" title="布局管理器"></a>布局管理器</h4><ul>
+<h4 id="布局管理器">布局管理器</h4>
+<ul>
 <li>流式布局</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setLayout(<span class="keyword">new</span> FlowLayout(FlowLayout.LEFT));</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>东西南北中</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.add(element,BorderLayout.EAST);<span class="comment">//EAST,WEST,NORTH,SOUTH,CENTER</span></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>表格Grid</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.setLayout(<span class="keyword">new</span> GridLayout(<span class="number">3</span>,<span class="number">2</span>));</span><br></pre></td></tr></table></figure>
-
 <p>布局互相之间l可以利用Pane嵌套形成复杂的布局</p>
-<h4 id="事件监听"><a href="#事件监听" class="headerlink" title="事件监听"></a>事件监听</h4><h2 id="2、Swing"><a href="#2、Swing" class="headerlink" title="2、Swing"></a>2、Swing</h2>
+<h4 id="事件监听">事件监听</h4>
+<h2 id="swing">2、Swing</h2>
+
   </div>
   <div>
     <a href="https://github.com/arctanln2/arctanln2.github.io/edit/myblog/source/_posts/java-gui-1.md" target="_blank">编辑</a>
@@ -200,17 +201,15 @@
          
           <li><a href="/projects_url">项目</a></li>
          
-          <li><a href="/categories">分类</a></li>
+          <li><a href="/categories/">分类</a></li>
          
-          <li><a href="/tags">标签</a></li>
-         
-          <li><a href="/search">搜索</a></li>
+          <li><a href="/tags/">标签</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81AWT"><span class="toc-number">1.</span> <span class="toc-text">1、AWT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E3%80%81AWT%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">1.1、AWT介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E3%80%81%E7%BB%84%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">1.2、组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Frame"><span class="toc-number">1.2.1.</span> <span class="toc-text">Frame</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Panel"><span class="toc-number">1.2.2.</span> <span class="toc-text">Panel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86%E5%99%A8"><span class="toc-number">1.2.3.</span> <span class="toc-text">布局管理器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC"><span class="toc-number">1.2.4.</span> <span class="toc-text">事件监听</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81Swing"><span class="toc-number">2.</span> <span class="toc-text">2、Swing</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#awt"><span class="toc-number">1.</span> <span class="toc-text">1、AWT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#awt%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">1.1、AWT介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">1.2、组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#frame"><span class="toc-number">1.2.1.</span> <span class="toc-text">Frame</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#panel"><span class="toc-number">1.2.2.</span> <span class="toc-text">Panel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86%E5%99%A8"><span class="toc-number">1.2.3.</span> <span class="toc-text">布局管理器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC"><span class="toc-number">1.2.4.</span> <span class="toc-text">事件监听</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#swing"><span class="toc-number">2.</span> <span class="toc-text">2、Swing</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -261,11 +260,9 @@
          
           <li><a href="/projects_url">项目</a></li>
          
-          <li><a href="/categories">分类</a></li>
+          <li><a href="/categories/">分类</a></li>
          
-          <li><a href="/tags">标签</a></li>
-         
-          <li><a href="/search">搜索</a></li>
+          <li><a href="/tags/">标签</a></li>
         
       </ul>
     </nav>
@@ -325,5 +322,8 @@
 <!-- Disqus Comments -->
 
 
+    
+    
+  
 </body>
 </html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Sequence Labeling 要考虑整个Sequence就可以解决，Sequence长短有长有短，就不能用开一个Window来解决。 Self-attention会吃一整个Sequence的信息。 Dot-product：两个向量点乘，输出关联系数\(\alpha\) 怎么计算\(\alpha\)? \[ k&#x3D;W^ka \] \[ q&#x3D;W^qa \] \[ \alph">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】李宏毅机器学习第四节 自注意力机制">
+<meta property="og:url" content="http://yoursite.com/2021/08/11/ML-note-4/index.html">
+<meta property="og:site_name" content="arctanln2">
+<meta property="og:description" content="Sequence Labeling 要考虑整个Sequence就可以解决，Sequence长短有长有短，就不能用开一个Window来解决。 Self-attention会吃一整个Sequence的信息。 Dot-product：两个向量点乘，输出关联系数\(\alpha\) 怎么计算\(\alpha\)? \[ k&#x3D;W^ka \] \[ q&#x3D;W^qa \] \[ \alph">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-11T13:25:40.000Z">
+<meta property="article:modified_time" content="2021-08-19T08:32:03.073Z">
+<meta property="article:author" content="kilostaray">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>【笔记】李宏毅机器学习第四节 自注意力机制</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/08/16/multimodel-1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2021/08/10/ML-note-3/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2021/08/11/ML-note-4/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://yoursite.com/2021/08/11/ML-note-4/&text=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2021/08/11/ML-note-4/&title=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2021/08/11/ML-note-4/&is_video=false&description=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【笔记】李宏毅机器学习第四节 自注意力机制&body=Check out this article: http://yoursite.com/2021/08/11/ML-note-4/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://yoursite.com/2021/08/11/ML-note-4/&title=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://yoursite.com/2021/08/11/ML-note-4/&title=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2021/08/11/ML-note-4/&title=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://yoursite.com/2021/08/11/ML-note-4/&title=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2021/08/11/ML-note-4/&name=【笔记】李宏毅机器学习第四节 自注意力机制&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2021/08/11/ML-note-4/&t=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#sequence-labeling"><span class="toc-number">1.</span> <span class="toc-text">Sequence Labeling</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E8%AE%A1%E7%AE%97alpha"><span class="toc-number">1.1.</span> <span class="toc-text">怎么计算\(\alpha\)?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#multi-head-self-attention"><span class="toc-number">1.2.</span> <span class="toc-text">Multi-head Self-attention</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#positional-encoding"><span class="toc-number">1.2.1.</span> <span class="toc-text">Positional Encoding</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E9%A2%86%E5%9F%9F"><span class="toc-number">1.3.</span> <span class="toc-text">应用领域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rnn"><span class="toc-number">2.</span> <span class="toc-text">RNN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">图的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5"><span class="toc-number">2.2.</span> <span class="toc-text">未来</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        【笔记】李宏毅机器学习第四节 自注意力机制
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">arctanln2</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-08-11T13:25:40.000Z" itemprop="datePublished">2021-08-11</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/ML/">ML</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="sequence-labeling">Sequence Labeling</h2>
+<p>要考虑整个Sequence就可以解决，Sequence长短有长有短，就不能用开一个Window来解决。</p>
+<p>Self-attention会吃一整个Sequence的信息。</p>
+<p>Dot-product：两个向量点乘，输出关联系数<span class="math inline">\(\alpha\)</span></p>
+<h3 id="怎么计算alpha">怎么计算<span class="math inline">\(\alpha\)</span>?</h3>
+<p><span class="math display">\[
+k=W^ka
+\]</span></p>
+<p><span class="math display">\[
+q=W^qa
+\]</span></p>
+<p><span class="math display">\[
+\alpha_{i,j}=q^i\cdot k^j
+\]</span></p>
+<p>比如<span class="math inline">\(a^1\)</span>,计算出<span class="math inline">\(\alpha_{1,1},\cdots,\alpha_{1,n}\)</span>后输入一个Soft-max函数，也可以用其他的。 <span class="math display">\[
+\alpha&#39;_{1,i}=exp(\alpha_{1,i})/\sum_j{exp(\alpha_{1,j})}
+\]</span> 得到<span class="math inline">\(\alpha&#39;\)</span>后 <span class="math display">\[
+v^i=W^va^i
+\]</span></p>
+<p><span class="math display">\[
+b^1=\sum_i \alpha&#39;_{1,i}v^i
+\]</span></p>
+<p>从a得到b后，这是并行的，先后顺序无所谓</p>
+<p>简写后 <span class="math display">\[
+Q=W^qI
+\]</span></p>
+<p><span class="math display">\[
+K=W^kI
+\]</span></p>
+<p><span class="math display">\[
+V=W^VI
+\]</span></p>
+<p>之后 <span class="math display">\[
+A=k^TQ
+\]</span></p>
+<p><span class="math display">\[
+O=VA&#39;
+\]</span></p>
+<p>A'是Attention Matrix。</p>
+<p>其中需要通过training训练的参数是<span class="math inline">\(W^k,W^q,W^v\)</span></p>
+<h3 id="multi-head-self-attention">Multi-head Self-attention</h3>
+<p>对于每个a可能不止一个q，<span class="math inline">\(q^{i,1},q^{i,2},\cdots\)</span></p>
+<p>对于Self-attention对于位置是不敏感的，不同位置是没有差别的。</p>
+<h4 id="positional-encoding">Positional Encoding</h4>
+<p>不同的位置有一个独特的位置向量<span class="math inline">\(e^i\)</span></p>
+<p>有各种各样的方法去生成这个向量，这是一个尚待研究的问题</p>
+<h3 id="应用领域">应用领域</h3>
+<p>语音：如果考虑一整句话，可能Matrix太大，采用Truncated Self-attention，只用看一部分的资讯。不考虑一整个句子，只考虑一小部分，加快效率。</p>
+<p>图像：可以看做是一个Vector Set，</p>
+<p>CNN是简化版的self-attention，文章<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1911.03584">On the Relationship between Self-Attention and Convolutional Layers</a>证明了这件事情。</p>
+<p>self-attention弹性比较大，需要比较多的训练数据，CNN弹性比较小，在比较少的训练数据上表现的也比较好</p>
+<h2 id="rnn">RNN</h2>
+<p>输入是Vector Sequence</p>
+<p>和self-attention的区别是</p>
+<p>1)RNN每一个只考虑了左边的输入，self-attention考虑了全部的输入，虽然RNN也可以是双向的。</p>
+<p>2)对于RNN较远输入的影响会削弱，而且无法并行处理全部输入</p>
+<p>综上，self-attention可能会有更好的效率，所以许多架构都逐渐从RNN改成self-attention。</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2006.16236">Transformers are RNNs</a>可以把self-attention进行修改变成RNN</p>
+<h3 id="图的应用">图的应用</h3>
+<p>对于图上有点，有边，如果两个点之间右边可以计算一下attention，如果没边，可以直接认为是0.</p>
+<p>self-attention用在graph上就是GNN的一种应用（水很深）</p>
+<h3 id="未来">未来</h3>
+<p>self-attention运算量很大，未来需要努力降低它的运算量。</p>
+<p>self-attention变形xxformer。</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2009.06732">Efficient Transformers: A Survery</a>讲了很多变形，速度快，但是表现会有减弱。</p>
+
+  </div>
+  <div>
+    <a href="https://github.com/arctanln2/arctanln2.github.io/edit/myblog/source/_posts/ML-note-4.md" target="_blank">编辑</a>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#sequence-labeling"><span class="toc-number">1.</span> <span class="toc-text">Sequence Labeling</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E8%AE%A1%E7%AE%97alpha"><span class="toc-number">1.1.</span> <span class="toc-text">怎么计算\(\alpha\)?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#multi-head-self-attention"><span class="toc-number">1.2.</span> <span class="toc-text">Multi-head Self-attention</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#positional-encoding"><span class="toc-number">1.2.1.</span> <span class="toc-text">Positional Encoding</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E9%A2%86%E5%9F%9F"><span class="toc-number">1.3.</span> <span class="toc-text">应用领域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rnn"><span class="toc-number">2.</span> <span class="toc-text">RNN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">图的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5"><span class="toc-number">2.2.</span> <span class="toc-text">未来</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2021/08/11/ML-note-4/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://yoursite.com/2021/08/11/ML-note-4/&text=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2021/08/11/ML-note-4/&title=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2021/08/11/ML-note-4/&is_video=false&description=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【笔记】李宏毅机器学习第四节 自注意力机制&body=Check out this article: http://yoursite.com/2021/08/11/ML-note-4/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://yoursite.com/2021/08/11/ML-note-4/&title=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://yoursite.com/2021/08/11/ML-note-4/&title=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2021/08/11/ML-note-4/&title=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://yoursite.com/2021/08/11/ML-note-4/&title=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2021/08/11/ML-note-4/&name=【笔记】李宏毅机器学习第四节 自注意力机制&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2021/08/11/ML-note-4/&t=【笔记】李宏毅机器学习第四节 自注意力机制"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2021
+    kilostaray
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+    
+    
+  
+      
+  
+      
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" crossorigin="anonymous"></script>
+        <script
+          defer
+          src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"
+          crossorigin="anonymous"
+          onload="renderMathInElement(document.body)">
+        </script>
+      
+  
+    
+  
+</body>
+</html>

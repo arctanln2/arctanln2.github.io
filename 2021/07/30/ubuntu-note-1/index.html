@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="ubuntu18.04安装python3.8安装Python3.8 修改系统默认python 发现打不开终端 安装python3.8后,Ubuntu无法打开终端gnome-terminal的解决方法整理版(importerror _gi) ImportError: cannot import name ‘_gi’ from partially initialized module ‘gi’ (mo">
+    <meta name="description" content="ubuntu18.04安装python3.8 安装Python3.8 修改系统默认python 发现打不开终端 安装python3.8后,Ubuntu无法打开终端gnome-terminal的解决方法整理版(importerror _gi) ImportError: cannot import name &#39;_gi&#39; from partially initialized module &#39;g">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu使用记录(1)">
 <meta property="og:url" content="http://yoursite.com/2021/07/30/ubuntu-note-1/index.html">
 <meta property="og:site_name" content="arctanln2">
-<meta property="og:description" content="ubuntu18.04安装python3.8安装Python3.8 修改系统默认python 发现打不开终端 安装python3.8后,Ubuntu无法打开终端gnome-terminal的解决方法整理版(importerror _gi) ImportError: cannot import name ‘_gi’ from partially initialized module ‘gi’ (mo">
+<meta property="og:description" content="ubuntu18.04安装python3.8 安装Python3.8 修改系统默认python 发现打不开终端 安装python3.8后,Ubuntu无法打开终端gnome-terminal的解决方法整理版(importerror _gi) ImportError: cannot import name &#39;_gi&#39; from partially initialized module &#39;g">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/2021/07/30/ubuntu-note-1/ubuntu-note-1/image-20210801180550586.png">
 <meta property="article:published_time" content="2021-07-30T10:41:35.000Z">
@@ -74,11 +74,9 @@
          
           <li><a href="/projects_url">项目</a></li>
          
-          <li><a href="/categories">分类</a></li>
+          <li><a href="/categories/">分类</a></li>
          
-          <li><a href="/tags">标签</a></li>
-         
-          <li><a href="/search">搜索</a></li>
+          <li><a href="/tags/">标签</a></li>
         
       </ul>
     </span>
@@ -117,7 +115,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ubuntu18-04%E5%AE%89%E8%A3%85python3-8"><span class="toc-number">1.</span> <span class="toc-text">ubuntu18.04安装python3.8</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">多版本管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pip%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">Pip问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ubuntu%E5%89%A9%E4%BD%99%E7%A9%BA%E9%97%B4%E4%B8%8D%E5%A4%9F-%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E5%90%AF%E5%8A%A8"><span class="toc-number">2.</span> <span class="toc-text">ubuntu剩余空间不够 无法正常启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ubuntu%E6%9F%A5%E7%9C%8B%E6%9C%AC%E6%9C%BA%E5%9C%B0%E5%9D%80"><span class="toc-number">3.</span> <span class="toc-text">ubuntu查看本机地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSH%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="toc-number">4.</span> <span class="toc-text">SSH远程连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ubuntu%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.1.</span> <span class="toc-text">ubuntu桥接网络设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E6%96%87%E4%BB%B6-dev-null"><span class="toc-number">4.2.</span> <span class="toc-text">特殊文件&#x2F;dev&#x2F;null</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ubuntu18.04%E5%AE%89%E8%A3%85python3.8"><span class="toc-number">1.</span> <span class="toc-text">ubuntu18.04安装python3.8</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">多版本管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pip%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">Pip问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ubuntu%E5%89%A9%E4%BD%99%E7%A9%BA%E9%97%B4%E4%B8%8D%E5%A4%9F-%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E5%90%AF%E5%8A%A8"><span class="toc-number">2.</span> <span class="toc-text">ubuntu剩余空间不够 无法正常启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ubuntu%E6%9F%A5%E7%9C%8B%E6%9C%AC%E6%9C%BA%E5%9C%B0%E5%9D%80"><span class="toc-number">3.</span> <span class="toc-text">ubuntu查看本机地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="toc-number">4.</span> <span class="toc-text">SSH远程连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ubuntu%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.1.</span> <span class="toc-text">ubuntu桥接网络设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E6%96%87%E4%BB%B6devnull"><span class="toc-number">4.2.</span> <span class="toc-text">特殊文件&#x2F;dev&#x2F;null</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -166,61 +164,58 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h2 id="ubuntu18-04安装python3-8"><a href="#ubuntu18-04安装python3-8" class="headerlink" title="ubuntu18.04安装python3.8"></a>ubuntu18.04安装python3.8</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43815902/article/details/112468083">安装Python3.8</a></p>
+    <h2 id="ubuntu18.04安装python3.8">ubuntu18.04安装python3.8</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43815902/article/details/112468083">安装Python3.8</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/White_Idiot/article/details/78240298">修改系统默认python</a></p>
 <p>发现打不开终端</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/LLY_A_/article/details/114385704">安装python3.8后,Ubuntu无法打开终端gnome-terminal的解决方法整理版(importerror _gi)</a></p>
-<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/59838238/importerror-cannot-import-name-gi-from-partially-initialized-module-gi-mo">ImportError: cannot import name ‘_gi’ from partially initialized module ‘gi’ (most likely due to a circular import)</a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/59838238/importerror-cannot-import-name-gi-from-partially-initialized-module-gi-mo">ImportError: cannot import name '_gi' from partially initialized module 'gi' (most likely due to a circular import)</a></p>
 <p>ubuntu升级python后，有可能会导致apt-get update、apt-get upgrade等命令出现错误：找不到apt_pkg模块。</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45616519/article/details/115870968">ubuntu升级python3.8后报错ModuleNotFoundError: No module named ‘apt_pkg‘</a></p>
-<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/38132755/importerror-no-module-named-encodings">ImportError: No module named ‘encodings’</a></p>
-<p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/905372/could-not-find-platform-independent-libraries-prefix">Could not find platform independent libraries </a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/38132755/importerror-no-module-named-encodings">ImportError: No module named 'encodings'</a></p>
+<p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/905372/could-not-find-platform-independent-libraries-prefix">Could not find platform independent libraries</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ljh@ljh-VirtualBox:~$ pip -V</span><br><span class="line">Could not find platform independent libraries &lt;prefix&gt;</span><br><span class="line">Consider setting $PYTHONHOME to &lt;prefix&gt;[:&lt;exec_prefix&gt;]</span><br><span class="line">Fatal Python error: initfsencoding: Unable to get the locale encoding</span><br><span class="line">ModuleNotFoundError: No module named &#x27;encodings&#x27;</span><br><span class="line"></span><br><span class="line">Current thread 0x00007ffbbb79d080 (most recent call first):</span><br><span class="line">已放弃 (核心已转储)</span><br></pre></td></tr></table></figure>
-
 <p>原因：找不到python解释器</p>
 <p>使用<strong>虚拟环境</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> rm -rf venv</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> virtualenv -p /usr/bin/python3 venv/</span></span><br><span class="line">source venv/bin/activate</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-
-
-
 <p>其他</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014775723/article/details/85213793">ubuntu安装python3.7，并更新python默认指向为python3.7</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Fatal Python error: init_sys_streams: can&#x27;t initialize sys standard streams</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/usr/lib/python3.8/io.py&quot;, line 54, in &lt;module&gt;</span><br><span class="line">ImportError: cannot import name &#x27;open_code&#x27; from &#x27;io&#x27; (unknown location)</span><br></pre></td></tr></table></figure>
-
 <p>该问题是PYTHONPATH冲突，重启后解决</p>
-<p><img src="ubuntu-note-1/image-20210801180550586.png" alt="image-20210801180550586"></p>
-<h3 id="多版本管理"><a href="#多版本管理" class="headerlink" title="多版本管理"></a>多版本管理</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37616927/article/details/108770185">Ubuntu安装pyenv</a></p>
+<div class="figure">
+<img src="ubuntu-note-1/image-20210801180550586.png" alt="image-20210801180550586" />
+<p class="caption">image-20210801180550586</p>
+</div>
+<h3 id="多版本管理">多版本管理</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37616927/article/details/108770185">Ubuntu安装pyenv</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR: The Python ssl extension was not compiled. Missing the OpenSSL lib?</span><br></pre></td></tr></table></figure>
-
 <p>发现<a target="_blank" rel="noopener" href="https://qastack.cn/ubuntu/14535/whats-the-local-folder-for-in-my-home-directory"><code>.local</code></a>文件夹</p>
 <p>pip install 命令是在用户目录下的<code>.local/lib/pythonx.x.x/site-packages</code>下</p>
-<h3 id="Pip问题"><a href="#Pip问题" class="headerlink" title="Pip问题"></a>Pip问题</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ljh@ljh-VirtualBox:~/openwhisk/ansible$ python -m pip install pip==9.0.3</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/usr/lib/python2.7/runpy.py&quot;, line 163, in _run_module_as_main</span><br><span class="line">    mod_name, _Error)</span><br><span class="line">  File &quot;/usr/lib/python2.7/runpy.py&quot;, line 111, in _get_module_details</span><br><span class="line">    __import__(mod_name)  # Do not catch exceptions initializing package</span><br><span class="line">  File &quot;/home/ljh/.local/lib/python2.7/site-packages/pip/__init__.py&quot;, line 1, in &lt;module&gt;</span><br><span class="line">    from typing import List, Optional</span><br><span class="line">ImportError: No module named typing</span><br></pre></td></tr></table></figure>
-
+<h3 id="pip问题">Pip问题</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ljh@ljh-VirtualBox:~/openwhisk/ansible$ python -m pip install pip==9.0.3</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/usr/lib/python2.7/runpy.py&quot;, line 163, in _run_module_as_main</span><br><span class="line">    mod_name, _Error)</span><br><span class="line">  File &quot;/usr/lib/python2.7/runpy.py&quot;, line 111, in _get_module_details</span><br><span class="line">    __import__(mod_name)  # Do not catch exceptions initializing package</span><br><span class="line">  File &quot;/home/ljh/.local/lib/python2.7/site-packages/pip/__init__.py&quot;, line 1, in &lt;module&gt;</span><br><span class="line">    from typing import List, Optional</span><br><span class="line">ImportError: No module named typing</span><br></pre></td></tr></table></figure>
 <p>pip版本过高，<code>.local/lib/pythonx.x.x/site-packages</code>下的pip会先引用，所以删掉即可</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ljh@ljh-VirtualBox:~$ sudo pip --version</span><br><span class="line">[sudo] ljh 的密码： </span><br><span class="line">pip 9.0.1 from /usr/lib/python2.7/dist-packages (python 2.7)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="ubuntu剩余空间不够-无法正常启动"><a href="#ubuntu剩余空间不够-无法正常启动" class="headerlink" title="ubuntu剩余空间不够 无法正常启动"></a>ubuntu剩余空间不够 无法正常启动</h2><p>ctrl+alt+F5</p>
+<h2 id="ubuntu剩余空间不够-无法正常启动">ubuntu剩余空间不够 无法正常启动</h2>
+<p>ctrl+alt+F5</p>
 <p>进入root界面</p>
 <p>登陆用户</p>
 <p>然后进行存储空间的管理</p>
-<h2 id="ubuntu查看本机地址"><a href="#ubuntu查看本机地址" class="headerlink" title="ubuntu查看本机地址"></a>ubuntu查看本机地址</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ifconfig</span></span><br><span class="line">enp0s3: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255</span><br></pre></td></tr></table></figure>
-
-<h2 id="SSH远程连接"><a href="#SSH远程连接" class="headerlink" title="SSH远程连接"></a>SSH远程连接</h2><p><a target="_blank" rel="noopener" href="https://linuxize.com/post/how-to-enable-ssh-on-ubuntu-18-04/">https://linuxize.com/post/how-to-enable-ssh-on-ubuntu-18-04/</a></p>
+<h2 id="ubuntu查看本机地址">ubuntu查看本机地址</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ifconfig</span></span><br><span class="line">enp0s3: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255</span><br></pre></td></tr></table></figure>
+<h2 id="ssh远程连接">SSH远程连接</h2>
+<p>https://linuxize.com/post/how-to-enable-ssh-on-ubuntu-18-04/</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install openssh-server</span><br><span class="line">sudo systemctl status ssh</span><br><span class="line">sudo ufw allow ssh</span><br><span class="line"><span class="meta">#</span><span class="bash"> start stop</span></span><br><span class="line">sudo service ssh start</span><br><span class="line">sudo service ssh stop</span><br><span class="line"><span class="meta">#</span><span class="bash"> 防火墙</span></span><br><span class="line">sudo ufw allow 81</span><br><span class="line">sudo ufw deny 81</span><br></pre></td></tr></table></figure>
-
 <p>virtualbox下10.0.2.15是内部ip，外部是无法连接的。</p>
 <p>virtualbox设置桥接网卡和仅主机后。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br><span class="line">enp0s9: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 192.168.56.101  netmask 255.255.255.0  broadcast 192.168.56.255</span><br><span class="line">        inet6 fe80::7e2f:a7d4:fa5b:5aca  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 08:00:27:e8:55:d3  txqueuelen 1000  (以太网)</span><br><span class="line">        RX packets 10  bytes 1759 (1.7 KB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 69  bytes 8272 (8.2 KB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>windows下</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">ljh</span>&gt;<span class="title">ssh</span> <span class="title">ljh</span>@192.168.56.101</span></span><br><span class="line"><span class="function"><span class="title">The</span> <span class="title">authenticity</span> <span class="title">of</span> <span class="title">host</span> &#x27;192.168.56.101 (192.168.56.101)&#x27; <span class="title">can</span>&#x27;<span class="title">t</span> <span class="title">be</span> <span class="title">established</span>.</span></span><br><span class="line"><span class="function"><span class="title">ECDSA</span> <span class="title">key</span> <span class="title">fingerprint</span> <span class="title">is</span> <span class="title">SHA256:GTMaCQ18Ep1EiRtH2wn8KD3AUecb928jsYZzPn4x0W4</span>.</span></span><br><span class="line"><span class="function"><span class="title">Are</span> <span class="title">you</span> <span class="title">sure</span> <span class="title">you</span> <span class="title">want</span> <span class="title">to</span> <span class="title">continue</span> <span class="title">connecting</span> (<span class="title">yes</span>/<span class="title">no</span>/[<span class="title">fingerprint</span>])? <span class="title">yes</span></span></span><br><span class="line"><span class="function"><span class="title">Warning</span>: <span class="title">Permanently</span> <span class="title">added</span> &#x27;192.168.56.101&#x27; (<span class="title">ECDSA</span>) <span class="title">to</span> <span class="title">the</span> <span class="title">list</span> <span class="title">of</span> <span class="title">known</span> <span class="title">hosts</span>.</span></span><br><span class="line"><span class="function"><span class="title">ljh</span>@192.168.56.101&#x27;<span class="title">s</span> <span class="title">password</span>:</span></span><br><span class="line"><span class="function"><span class="title">Welcome</span> <span class="title">to</span> <span class="title">Ubuntu</span> 18.04.5 <span class="title">LTS</span> (<span class="title">GNU</span>/<span class="title">Linux</span> 4.15.0-151-<span class="title">generic</span> <span class="title">x86_64</span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"> * <span class="title">Documentation</span>:  <span class="title">https</span>://<span class="title">help.ubuntu.com</span></span></span><br><span class="line"><span class="function"> * <span class="title">Management</span>:     <span class="title">https</span>://<span class="title">landscape.canonical.com</span></span></span><br><span class="line"><span class="function"> * <span class="title">Support</span>:        <span class="title">https</span>://<span class="title">ubuntu.com</span>/<span class="title">advantage</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">0 <span class="title">updates</span> <span class="title">can</span> <span class="title">be</span> <span class="title">applied</span> <span class="title">immediately</span>.</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Ubuntu</span> <span class="title">comes</span> <span class="title">with</span> <span class="title">ABSOLUTELY</span> <span class="title">NO</span> <span class="title">WARRANTY</span>, <span class="title">to</span> <span class="title">the</span> <span class="title">extent</span> <span class="title">permitted</span> <span class="title">by</span></span></span><br><span class="line"><span class="function"><span class="title">applicable</span> <span class="title">law</span>.</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Last</span> <span class="title">login</span>: <span class="title">Fri</span> <span class="title">Jul</span> 30 17:57:36 2021</span></span><br><span class="line"><span class="function"><span class="title">ljh</span>@<span class="title">ljh</span>-<span class="title">VirtualBox</span>:~$</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="ubuntu桥接网络设置"><a href="#ubuntu桥接网络设置" class="headerlink" title="ubuntu桥接网络设置"></a>ubuntu桥接网络设置</h3><p>ubuntu上设置 参考<a target="_blank" rel="noopener" href="https://blog.51cto.com/ypyu1989/1538242">https://blog.51cto.com/ypyu1989/1538242</a></p>
-<p>windows上设置 参考<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000037492061">https://segmentfault.com/a/1190000037492061</a></p>
+<h3 id="ubuntu桥接网络设置">ubuntu桥接网络设置</h3>
+<p>ubuntu上设置 参考https://blog.51cto.com/ypyu1989/1538242</p>
+<p>windows上设置 参考https://segmentfault.com/a/1190000037492061</p>
 <p>windows查看ip地址使用<code>ipconfig</code>命令</p>
-<h3 id="特殊文件-dev-null"><a href="#特殊文件-dev-null" class="headerlink" title="特殊文件/dev/null"></a>特殊文件/dev/null</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/longerzone/article/details/12948925">Linux 下的两个特殊的文件 – /dev/null 和 /dev/zero 简介及对比</a></p>
+<h3 id="特殊文件devnull">特殊文件/dev/null</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/longerzone/article/details/12948925">Linux 下的两个特殊的文件 -- /dev/null 和 /dev/zero 简介及对比</a></p>
 
   </div>
   <div>
@@ -245,17 +240,15 @@
          
           <li><a href="/projects_url">项目</a></li>
          
-          <li><a href="/categories">分类</a></li>
+          <li><a href="/categories/">分类</a></li>
          
-          <li><a href="/tags">标签</a></li>
-         
-          <li><a href="/search">搜索</a></li>
+          <li><a href="/tags/">标签</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ubuntu18-04%E5%AE%89%E8%A3%85python3-8"><span class="toc-number">1.</span> <span class="toc-text">ubuntu18.04安装python3.8</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">多版本管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pip%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">Pip问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ubuntu%E5%89%A9%E4%BD%99%E7%A9%BA%E9%97%B4%E4%B8%8D%E5%A4%9F-%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E5%90%AF%E5%8A%A8"><span class="toc-number">2.</span> <span class="toc-text">ubuntu剩余空间不够 无法正常启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ubuntu%E6%9F%A5%E7%9C%8B%E6%9C%AC%E6%9C%BA%E5%9C%B0%E5%9D%80"><span class="toc-number">3.</span> <span class="toc-text">ubuntu查看本机地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSH%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="toc-number">4.</span> <span class="toc-text">SSH远程连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ubuntu%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.1.</span> <span class="toc-text">ubuntu桥接网络设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E6%96%87%E4%BB%B6-dev-null"><span class="toc-number">4.2.</span> <span class="toc-text">特殊文件&#x2F;dev&#x2F;null</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ubuntu18.04%E5%AE%89%E8%A3%85python3.8"><span class="toc-number">1.</span> <span class="toc-text">ubuntu18.04安装python3.8</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">多版本管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pip%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">Pip问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ubuntu%E5%89%A9%E4%BD%99%E7%A9%BA%E9%97%B4%E4%B8%8D%E5%A4%9F-%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E5%90%AF%E5%8A%A8"><span class="toc-number">2.</span> <span class="toc-text">ubuntu剩余空间不够 无法正常启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ubuntu%E6%9F%A5%E7%9C%8B%E6%9C%AC%E6%9C%BA%E5%9C%B0%E5%9D%80"><span class="toc-number">3.</span> <span class="toc-text">ubuntu查看本机地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="toc-number">4.</span> <span class="toc-text">SSH远程连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ubuntu%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.1.</span> <span class="toc-text">ubuntu桥接网络设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E6%96%87%E4%BB%B6devnull"><span class="toc-number">4.2.</span> <span class="toc-text">特殊文件&#x2F;dev&#x2F;null</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -306,11 +299,9 @@
          
           <li><a href="/projects_url">项目</a></li>
          
-          <li><a href="/categories">分类</a></li>
+          <li><a href="/categories/">分类</a></li>
          
-          <li><a href="/tags">标签</a></li>
-         
-          <li><a href="/search">搜索</a></li>
+          <li><a href="/tags/">标签</a></li>
         
       </ul>
     </nav>
@@ -370,5 +361,8 @@
 <!-- Disqus Comments -->
 
 
+    
+    
+  
 </body>
 </html>
